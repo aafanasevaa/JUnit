@@ -1,11 +1,11 @@
 package aafanasyevaa;
 
-import com.codeborne.selenide.Condition;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
 import java.util.stream.Stream;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -16,7 +16,7 @@ public class Tests extends TestData {
     public void findDisneyPrincess(String searchQuery) {
         open(url);
         $("#search").setValue(searchQuery).pressEnter();
-        $("#search-container").shouldHave(Condition.text(searchQuery));
+        $("#search-container").shouldHave(text(searchQuery));
     }
 
     @CsvSource(value = {
@@ -27,7 +27,7 @@ public class Tests extends TestData {
     public void findDisneyPrincessAndCheckResult(String searchQuery, String result) {
         open(url);
         $("#search").setValue(searchQuery).pressEnter();
-        $("#search-container").shouldHave(Condition.text(result));
+        $("#search-container").shouldHave(text(result));
     }
 
     @EnumSource(Princess.class)
@@ -35,7 +35,7 @@ public class Tests extends TestData {
     public void findDisneyPrincessAndCheckResult(Princess princess) {
         open(url);
         $("#search").setValue(princess.name()).pressEnter();
-        $("#search-container").shouldHave(Condition.text(princess.name()));
+        $("#search-container").shouldHave(text(princess.name()));
     }
 
     static Stream<Arguments> findDisneyPrincessAndCheckResults() {
@@ -50,6 +50,6 @@ public class Tests extends TestData {
     public void findDisneyPrincessAndCheckResults(String searchQuery, String result) {
         open(url);
         $("#search").setValue(searchQuery).pressEnter();
-        $("#search-container").shouldHave(Condition.text(String.valueOf(result)));
+        $("#search-container").shouldHave(text(String.valueOf(result)));
     }
 }
